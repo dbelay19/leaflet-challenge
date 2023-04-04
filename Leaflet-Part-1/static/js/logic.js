@@ -6,6 +6,11 @@ var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.ge
 // Store our API endpoint as queryUrl.
 var queryUrl = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2021-01-01&endtime=2021-01-02&maxlongitude=-69.52148437&minlongitude=-123.83789062&maxlatitude=48.74894534&minlatitude=25.16517337";
 
+// var myMap = L.map("map", {
+//   center: [27.96044, -82.30695],
+//   zoom: 7
+// });
+
 //Function to determine circle size
 function circleSize(mag) {
   return mag * 40000;
@@ -76,6 +81,7 @@ function createFeatures(earthquakeData) {
 }
 
 function createMap(earthquakes) {
+ 
   // Create the base layers.
   var street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -91,7 +97,11 @@ function createMap(earthquakes) {
     "Street Map": street,
     "Topographic Map": topo
   };
-
+/* 
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(myMap);
+ */
   // Create an overlay object to hold our overlay.
   var overlayMaps = {
     Earthquakes: earthquakes
@@ -115,37 +125,6 @@ function createMap(earthquakes) {
 
 }
 /*
- // Create a legend to display information about our map
- var info = L.control({
-  position: "bottomright"
-});
-
-// Crate a varibale that holds the color for the legend
-var depthColors = {
-  "l10": "#FFFFB2",
-  "l30": "#FECC5C",
-  "l50": "#FD8D3C",
-  "l70": "#F03B20",
-  "l90": "#BD0026",
-  "g90": "#800026"
-};
-// When the layer control is added, insert a div with the class of "legend"
-info.onAdd = function() {
-  var div = L.DomUtil.create("div", "legend");
-  div.innerHTML=[
-      "<h2>Depth (km)</h2>",
-      "<p class='l10'>Less than 10</p>",
-      "<p class='l30'>Between 10 and 30</p>",
-      "<p class='l50'>Between 30 and 50</p>",
-      "<p class='l70'>Between 50 and 70</p>",
-      "<p class='l90'>Between 70 and 90</p>",
-      "<p class='g90'>Greater than 90</p>"
-  ].join("");
-
-  return div;
-};
-*/
-
 var info = L.control({
   position: "bottomright"
 });
@@ -171,6 +150,9 @@ info.onAdd = function() {
   return div;
 };
 
+// Add the legend to the map.
+info.addTo(myMap);
+
 function getLegendLabel(depth) {
   switch (depth) {
     case "l10":
@@ -187,3 +169,30 @@ function getLegendLabel(depth) {
       return "Greater than 90";
   }
 }
+*/
+let legend = L.control({
+  position: "bottomright"
+});
+// Then add all the details for the legend
+legend.onAdd = function() {
+  let div = L.DomUtil.create("div", "info legend");
+  const magnitudes = [0, 1, 2, 3, 4, 5];
+  const colors = [
+    "#98ee00",
+    "#d4ee00",
+    "#eecc00",
+    "#ee9c00",
+    "#ea822c",
+    "#ea2c2c"
+  ];
+// Looping through our intervals to generate a label with a colored square for each interval.
+  for (var i = 0; i < magnitudes.length; i++) {
+    console.log(colors[i]);
+    div.innerHTML +=
+      "<i style='background: " + colors[i] + "'></i> " +
+      magnitudes[i] + (magnitudes[i + 1] ? "&ndash;" + magnitudes[i + 1] + "<br>" : "+");
+    }
+    return div;
+  };
+  // Finally, we our legend to the map.
+  legend.addTo(map);
