@@ -13,6 +13,10 @@ This module is designed to help us (students) apply our knowledge that we have l
 
 ![image](https://user-images.githubusercontent.com/117956888/229982008-15e2ec38-ea6a-41a6-9b90-fdcfde24c608.png)
 
+* Earthquick leaflet (map) with legend
+
+![image](https://user-images.githubusercontent.com/117956888/229984259-02bb0339-5513-4ce9-9436-09302025da4a.png)
+
 Example of popups that provided additionla information regarding time, location, magnitude, and depth of the earthquickes.
 
 ![image](https://user-images.githubusercontent.com/117956888/229982854-9359bec4-2fc9-4930-b845-c1362ac7f98e.png)
