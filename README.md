@@ -11,6 +11,10 @@ This module is designed to help us (students) apply our knowledge that we have l
 
 ![image](https://user-images.githubusercontent.com/117956888/229981424-700eb357-4969-4fe0-a0c3-97989e70ee45.png)
 
+* Screenshot of Json data that can be accessssed from the above link
+
+![image](https://user-images.githubusercontent.com/117956888/230244723-7093d848-ee0d-4122-8c14-0fb6fec4840c.png)
+
 * Code example for creating legeded and adding it to the map
 
 ![image](https://user-images.githubusercontent.com/117956888/229981727-fefae3a7-3a1e-40b4-af70-be938827ba66.png)
